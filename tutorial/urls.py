@@ -20,6 +20,7 @@ from django.urls import path, include
 import snippets
 
 urlpatterns = [
+    path('', include('root.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path('snippets/', include('snippets.urls')),
     path('users/', include('users.urls')),
