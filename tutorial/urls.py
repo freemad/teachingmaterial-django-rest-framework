@@ -16,11 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+
+import snippets.views
+import users.views
+
+router = DefaultRouter()
+router.register(r"snippets", snippets.views.SnippetViewSet, basename="snippet")
+router.register(r"users", users.views.UserViewSet, basename="user")
 
 urlpatterns = [
-    path('', include('root.urls')),
-    path('api-auth/', include('rest_framework.urls')),
-    path('snippets/', include(('snippets.urls', "snippet"), namespace="snippet")),
-    path('users/', include(('users.urls', "user"), namespace="user")),
+    path('', include(router.urls)),
     path('admin/', admin.site.urls),
 ]
